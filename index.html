@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>Ant Media Server WebRTC Publish</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8">
+<link rel="stylesheet" href="css/external/bootstrap4/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+<link rel="stylesheet" href="css/common.css" />
+<script src="js/external/adapter-latest.js"></script>
+
+<style>
+video {
+	width: 100%;
+	max-width: 640px;
+}
+
+/* Everything but the jumbotron gets side spacing for mobile first views */
+.header, .marketing, .footer {
+	padding: 15px;
+}
+
+/* Custom page header */
+.header {
+	padding-bottom: 20px;
+}
+
+/* Customize container */
+@media ( min-width : 768px) {
+	.container {
+		max-width: 730px;
+		margin: 0%;
+	}
+}
+
+.container-narrow>hr {
+	margin: 30px 0;
+}
+
+/* Main marketing message and sign up button */
+.jumbotron {
+	text-align: center;
+    margin-bottom: 0px;
+}
+
+/* Responsive: Portrait tablets and up */
+@media screen and (min-width: 768px) {
+	/* Remove the padding we set earlier */
+	.header, .marketing, .footer {
+		padding-right: 0;
+		padding-left: 0;
+	}
+}
+.options {
+		display:none;
+	}
+.message_area {
+	height: 300px;
+	overflow-y: auto;
+	border-width: thin;
+	border-style: groove;
+	background-image: linear-gradient(to top, #ebc0fd 0%, #d9ded8 100%);
+
+}
+.nav_bg{
+    background-image: linear-gradient(to top, #9a3bc2 0%, #753ec0 100%) !important;
+}
+
+.row{
+	margin: 0px;
+}
+.p-set{
+	padding:0px !important;
+}
+.full-chat-body{
+	box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    height: 570px;
+    position: relative;
+	width: 500px;
+}
+.chat-bottom{
+	bottom: 0;
+    width: 100%;
+    height: 70px;
+    padding: 10px 10px;
+    position: absolute;
+	background-image: linear-gradient(to top, #9a3bc2 0%, #753ec0 100%);
+	box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
+}
+.chat-bottom>textarea{
+    border-bottom-right-radius: 15px;
+    border-top-right-radius: 15px;
+}
+.chat-bottom>textarea::-webkit-scrollbar{
+	display: none;
+}
+.SendBtn{
+	position: absolute;
+    font-size: 43px;
+    top: 5px;
+    right: 26px;
+}
+.bi-send-fill{display: none;}
+.SendBtn:hover>.bi-send{display: none;}
+.SendBtn:hover>.bi-send-fill{display: block;}
+
+.chat-body{
+	width: 100%;
+    height: 80%;
+	padding: 10px 0px;
+    background-image: linear-gradient(120deg, #d4fc79 0%, #96e6a1 100%);
+	overflow: scroll;
+}
+.chat-body::-webkit-scrollbar{
+	display: none;
+}
+.messageCont{
+	padding-right: 60px;
+}
+.messageImg{
+    width:5%;   
+    height: 25px;
+    margin: -2px 5px;
+    border-radius: 50%;
+    background-image: url("./assits/pngwing.com (1).png");
+}
+.message-box{
+    color: #ffff;
+    padding: 5px 5px;
+    margin-top: -22px;
+    margin-left: 40px;
+	margin-bottom: 20px;
+    border-top-right-radius: 15px;
+	border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    background-image: linear-gradient(to top, #3045d0 0%, #083967 100%);
+}
+.messageCont>p{
+    margin-left: 45px;
+}
+.message-box2{
+	color: #fff;
+    text-align: end;
+    margin-top: 10px;
+    padding: 5px 10px;
+    margin-right: 15px;
+    margin-bottom: 20px;
+    border-top-left-radius: 15px;
+	border-top-right-radius: 15px;
+    border-bottom-left-radius: 12px;
+    background-image: linear-gradient(to right, #53021b 0%, #1b1806 100%);
+}
+.messageCont2{
+	text-align: -webkit-right;
+    width: 100%;
+    padding-left: 65px;
+}
+.nav-item{
+	position: absolute;
+    right: 30px;
+}
+.bi-google::before {
+    margin-right: 5px;
+}
+.LogTheChat{
+	background-color: #ffff;
+    margin-top: 520px;
+    margin-right: 10px;
+    width: 320px;
+    height: 46px;
+    text-align: center;
+    font-size: 25px;
+}
+.hide{
+	display: none;
+}
+</style>
+</head>
+<body>
+
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+		<a class="navbar-brand" href="#">
+			<img  class="d-inline-block align-top" >
+			WebRTC Publish
+		  </a>
+		 <div class="nav-item">
+			<button class="btn btn-success GoogleLogIn" ><i class="bi bi-google"></i>SignIn</button>
+			<button class="btn btn-danger hide signOut" ><i class="bi bi-google"></i>signOut</button>
+		 </div>
+
+	</nav>
+<!-- 	
+			<div class="header clearfix">
+				<div class="row">
+					<h3 class="col text-muted">WebRTC Publish</h3>
+					<nav class="col align-self-center">
+						<ul class="nav float-right">
+							<li><a href="http://antmedia.io">Contact</a></li>
+						</ul>
+					</nav>
+				</div>
+			</div> -->
+
+		<div class="row" style="background-color: #e8ecef;">
+			<div class="col-lg-7 p-set">
+				<div class="jumbotron">
+					<div class="col-sm-12 form-group">
+					   <video id="localVideo"  autoplay muted controls playsinline></video>
+					</div>
+					<div class="form-group col-sm-12 text-left">
+					   <input type="text" class="form-control"
+						  id="streamId" name="streamIdTextBox" placeholder="Type stream ID">
+					</div>
+					<div class="col-sm-12 text-right">
+					   <button type="button" id="options" class="btn btn-outline-primary btn-sm" >Options</button>
+					</div>
+					<div class="form-group col-sm-12 text-left options">
+					   <div style="margin-top:10px;" class="form-group">Microphone Gain: <br><input type=range id="volume_change_input" min=0 max=1 value=1 step=0.01></div>
+					   <label class=" mr-2" for="inlineFormCustomSelectPref">Max Video Bitrate(Kbps):</label>
+					   <div class="form-inline">
+						  <input type="text" class="form-control  mr-sm-2"
+							 id="maxBandwidthTextBox" name="maxBandwidthTextBox" >
+						  <button type="button" class="btn btn-outline-primary btn-sm" id="max_bandwidth_apply" >Apply</button>
+					   </div>
+					   <div class="dropdown-divider"></div>
+					   <legend class="col-form-label video-source-legend">Video Source</legend>
+					   <a id="browser_screen_share_doesnt_support" href="https://caniuse.com/#search=getDisplayMedia">Your browser doesn't support screen share. You can see supported browsers in this link </a>
+					   <div class="dropdown-divider"></div>
+					   <legend class="col-form-label audio-source-legend">Audio Source</legend>
+					</div>
+					<div class="dropdown-divider"></div>
+					<div class="form-group col-sm-12 text-left options">
+					   <label>Data Channel Messages</label>
+					   <div id="all-messages" class="message_area"></div>
+					   <div class="form-row">
+						  <div class="form-group col-sm-8">
+							 <input type="text" class="form-control" id="dataTextbox" placeholder="Write your message to send players">
+						  </div>
+						  <div class="form-group col-sm-2">
+							 <button type="button" id="send" class="btn btn-outline-primary btn-block">Send</button>
+						  </div>
+						  <div class="form-group col-sm-2">
+							 <button id="send-image-button" type="button" class="btn btn-outline-primary btn-block">
+							 Image
+							 </button>
+							 <input id="file-input" type="file" name="name" accept="image/x-png,image/gif,image/jpeg" style="display: none" />
+						  </div>
+					   </div>
+					</div>
+					<div class="form-group">	
+					   <button class="btn btn-primary" disabled
+						  id="start_publish_button">Start Publishing</button>
+					   <button class="btn btn-primary" disabled
+						  id="stop_publish_button">Stop Publishing</button>
+					</div>
+					<span class="badge badge-success" id="broadcastingInfo" style="font-size:14px;display:none"
+					   style="display: none">Publishing</span>
+					<div class="dropdown-divider"></div>
+					<span style="font-size:16px;display:block;padding:10px;"><a href="samples.html">WebRTC Sample List</a></span>
+					<div class="col-sm-10 offset-sm-1" id="stats_panel" style="display: none;">
+					   <div class="row text-muted text-left">
+						  <div class="col-sm-6">
+							 <small>
+								<div id="average_bit_rate_container">Average Bitrate(Kbps): <span id="average_bit_rate"></span></div>
+								<div id="latest_bit_rate_container">Latest Bitrate(Kbps): <span id="latest_bit_rate"></span></div>
+								<div id="packet_lost_container">PacketsLost: <span id="packet_lost_text"></span></div>
+								<div id="jitter_text_container">Jitter(Secs): <span id="jitter_text"></span></div>
+								<div>Audio Level: <span id="audio_level_text"></span> <meter id="audio_level_text_container" high="0.25" max="1" value="0"></meter></div>
+							 </small>
+						  </div>
+						  <div class="col-sm-6">
+							 <small>
+								<div id="round_trip_time_container">Round Trip Time(Secs): <span id="round_trip_time"></span></div>
+								<div id="source_resolution_container">Source WidthxHeight: <span id="source_width"></span> x <span id="source_height"></span></div>
+								<div id="ongoing_resolution_container">On-going WidthxHeight: <span id="ongoing_width"></span> x <span id="ongoing_height"></span></div>
+								<div id="on_going_fps_container">On-going FPS: <span id="on_going_fps"></span></div>
+							 </small>
+						  </div>
+					   </div>
+					</div>
+				 </div>
+			</div>
+			<!--chat starts  -->
+			<div style="position: fixed;right: 0;">
+				<div class="LogTheChat ">
+					<p><span>logIn to see Chats</p>
+				</div>
+				<div class="col p-set full-chat-body hide" >	
+					
+					<nav class="navbar navbar-light nav_bg">
+						
+						<a class="navbar-brand" href="#">Chatts</a>
+					  </nav>
+					  <div class="chat-body"></div>
+					  
+				
+					  
+					  <div class="chat-bottom">
+						<textarea class="inputBox" cols="50" rows="2" placeholder="type your message"></textarea>
+						<div class="SendBtn" >
+							<i class="bi bi-send"></i>
+							<i class="bi bi-send-fill"></i>
+						  </div>
+					  </div>
+				</div>
+			</div>
+			<!--chat ends -->
+
+		</div>
+	    
+
+			
+	
+	<footer class="footer text-center">
+		<p><a href="http://antmedia.io">Ant Media Server</a></p>
+	</footer>
+
+
+	<script src="js/external/jquery-3.4.1.min.js"  crossorigin="anonymous"></script>
+	<script src="js/external/popper.min.js" crossorigin="anonymous"></script>
+	<script src="js/external/bootstrap.min.js"  crossorigin="anonymous"></script>
+	<script src="./mainScript.js" type="module" lang="javascript"></script>
+	<script src="./firbase.js" type="module" lang="javascript"></script>
+</body>
+
+</html>
