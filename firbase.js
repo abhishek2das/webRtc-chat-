@@ -1,7 +1,7 @@
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js';
 import { getFirestore} from 'https://www.gstatic.com/firebasejs/9.15.0/firebase-firestore.js';
 import { getAuth, signInWithPopup, GoogleAuthProvider,signOut  } from 'https://www.gstatic.com/firebasejs/9.15.0/firebase-auth.js';
-import {getDatabase,set,ref,push,child,onValue,onChildAdded} from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js";
+import {getDatabase,set,ref,push,child,onChildAdded} from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBbpvzfNTXm3M8vAqK-0HLE6plSgF4vBD0",
@@ -19,15 +19,13 @@ const firebaseConfig = {
   const provider = new GoogleAuthProvider();
   provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
 
-  var Uid = "message";
+   var Uid = "message";
    var login = false
    var userUid = "";
    var profPic = "";
    var userName ="";
-
-  // var mainData = "";
-  // var mainProfile = document.querySelector(".astroImg");
-  // var mainProName = document.querySelector(".pHeadingName");
+   var mainProfile = document.querySelector(".dpImg");
+   var mainProName = document.querySelector(".astroName");
 
 
 
@@ -39,7 +37,8 @@ const firebaseConfig = {
     login = true
     $(".signOut").show()
     $(".GoogleLogIn").hide()
-
+    mainProfile.src = profPic
+    mainProName.innerHTML = userName
   }
 
 function loginOp(){
@@ -64,10 +63,12 @@ $(".signOut").click(()=>{
     $(".LogTheChat").show();
     $(".signOut").hide()
     $(".GoogleLogIn").show()
-    var login = false
-    var userUid = "";
-    var profPic = "";
-    var userName ="";
+     login = false
+     userUid = "";
+     profPic = "";
+     userName ="";
+     mainProfile.src = ""
+     mainProName.innerHTML = ""
   }).catch((error) => {});
 })
 
@@ -76,7 +77,6 @@ $(".SendBtn").click(()=>{
   if(login == true){
     var message = document.querySelector(".inputBox").value;
     if(message !== ""){
-      Uid = "message";
       const id = push(child(ref(database),Uid)).key;
     
       set(ref(database, `${Uid}/` + id), {
@@ -140,5 +140,20 @@ input.addEventListener("keypress", function(event) {
   }
 });
 
+// console.log(
+//   "%chello",
+//   "color:red;font-family:system-ui;font-size:1rem;font-weight:bolder;left:50%;padding:2px 2px 2px 2px;"
+// );
 
+$(".strtLive").click(()=>{
+  
 
+ push(child(ref(database),Uid));
+    
+  // set(ref(database, `message` + id), {
+  //     uid: userUid,
+  //     message: message,
+  //     UName:userName,
+  //     uPhoto:profPic
+  // });
+})
